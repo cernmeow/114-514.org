@@ -3,9 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="prefetch" href="/about.html">
+
 <title>Net Work ?</title>
-<link rel="icon" href="/Uh_favicon.svg">
+
+<meta name="description" content="Browser-based HTTP reachability test. Measures RTT, jitter and timeout loss directly from your browser. No installation required.">
+<meta name="keywords" content="ping, latency, RTT, jitter, timeout loss, network test, browser ping">
+<meta name="author" content="cernmeow">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0a0a">
+
+<link rel="canonical" href="https://114-514.org/">
+<link rel="icon" href="/Uh_favicon.svg" type="image/svg+xml">
+<link rel="prefetch" href="/about.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Net Work ?">
+<meta property="og:description" content="Browser-based HTTP reachability test. Measures RTT, jitter and timeout loss directly from your browser.">
+<meta property="og:url" content="https://114-514.org/">
+<meta property="og:image" content="https://114-514.org/Uh_favicon.svg">
+<meta property="og:site_name" content="Net Work ?">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Net Work ?">
+<meta name="twitter:description" content="Browser-based HTTP RTT, jitter and timeout-loss test.">
+<meta name="twitter:image" content="https://114-514.org/Uh_favicon.svg">
+
 <style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b0b0b;color:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
@@ -29,6 +51,7 @@ footer a{color:#666;text-decoration:none}
 footer a:hover{color:#8B5A2B}
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -93,9 +116,12 @@ async function once(){
   const c=new AbortController(),timer=setTimeout(()=>c.abort(),TIMEOUT);
   try{
     const t=performance.now();
-    const r=await fetch(URL,{cache:"no-store",credentials:"same-origin",signal:c.signal});    if(!r.ok)throw Error(r.status);
+    const r=await fetch(URL,{cache:"no-store",credentials:"same-origin",signal:c.signal});
+    if(!r.ok)throw Error(r.status);
     return performance.now()-t;
-  }finally{clearTimeout(timer)}
+  }finally{
+    clearTimeout(timer);
+  }
 }
 
 (async()=>{
