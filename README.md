@@ -4,6 +4,8 @@ Net Work ?
 
 A lightweight browser-based HTTP reachability test.
 
+Measures HTTP reachability from the browser itself rather than ICMP echo latency.Measures HTTP reachability from the browser itself rather than ICMP echo latency.
+
 ## Features
 
 - Browser-only
@@ -16,10 +18,6 @@ A lightweight browser-based HTTP reachability test.
 ## Website
 
 https://114-514.org
-
-## Source
-
-https://github.com/cernmeow/114-514.org
 
 ## License
 
