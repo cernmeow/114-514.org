@@ -6,24 +6,38 @@
 <link rel="prefetch" href="/">
 <title>About / Net Work ?</title>
 <link rel="icon" href="/Uh_favicon.svg">
+
+<meta name="description" content="How Net Work ? checks browser-side HTTP reachability.">
+<link rel="canonical" href="https://114-514.org/about.html">
+
+<meta property="og:title" content="About / Net Work ?">
+<meta property="og:description" content="A tiny browser-side HTTP reachability check.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://114-514.org/about.html">
+<meta property="og:image" content="https://114-514.org/Uh_favicon.svg">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="About / Net Work ?">
+<meta name="twitter:description" content="YES / NO">
+
 <style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:#0b0b0b;color:#ddd;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.75}
 nav{position:fixed;top:18px;left:24px;right:24px;display:flex;flex-wrap:wrap;gap:.55rem;font-size:.9rem;background:#0b0b0bee}
 nav a{color:#999;text-decoration:none}
-nav a:hover{color:#8B5A2B;text-shadow:0 0 8px #8B5A2B,0 0 18px #114514}
+nav a:hover{color:#C7922F;text-shadow:0 0 8px #C7922F,0 0 18px #114514}
 nav span{color:#666}
 main{max-width:760px;margin:0 auto;padding:96px 24px 64px}
-h1,h2{color:#8B5A2B}
+h1,h2{color:#C7922F}
 h1{font-size:clamp(2.4rem,9vw,5rem);line-height:1}
 h2{margin-top:3rem;scroll-margin-top:96px}
-p{color:#ccc}
-a{color:#8B5A2B}
+p,li{color:#ccc}
+a{color:#C7922F}
 code{color:#fff}
-ul{color:#ccc}
 footer{margin-top:4rem;color:#555;font-size:.8rem}
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -58,7 +72,8 @@ footer{margin-top:4rem;color:#555;font-size:.8rem}
   <h2 id="methodology">Methodology</h2>
 
   <p>
-    Net Work ? does not use ICMP ping. Browsers cannot send ICMP packets directly.
+    Net Work ? does not use ICMP ping. Browsers cannot send ICMP packets
+    directly.
   </p>
 
   <p>
@@ -82,7 +97,7 @@ footer{margin-top:4rem;color:#555;font-size:.8rem}
 
   <p>
     This site measures <strong>HTTP RTT</strong>, not raw ICMP ping. It includes
-    browser, HTTP, cache-bypass, and server/CDN response overhead.
+    browser, HTTP, cache behavior, and Cloudflare/server response overhead.
   </p>
 
   <h2 id="jitter">What is Jitter?</h2>
@@ -106,18 +121,42 @@ footer{margin-top:4rem;color:#555;font-size:.8rem}
   <p>
     It is not raw packet loss at the network layer. It is a browser-visible
     timeout rate, which is still useful for judging whether this website is
-    reachable.
+    reachable after the page has loaded.
   </p>
 
   <h2 id="what-yes-means">What does YES mean?</h2>
 
   <p>
-    <code>YES</code> means this browser can successfully reach this website.
+    <code>YES</code> means this browser successfully completed an HTTPS request
+    to <code>114-514.org</code>.
   </p>
 
   <p>
     It does not guarantee that every website, DNS resolver, game server, or
     service on the Internet is reachable.
+  </p>
+
+  <h2 id="what-no-means">What does NO mean?</h2>
+
+  <p>
+    <code>NO</code> means the browser could not complete the test request after
+    this page had already loaded.
+  </p>
+
+  <p>Possible causes include:</p>
+
+  <ul>
+    <li>No Internet connection.</li>
+    <li>DNS failure.</li>
+    <li>Firewall or network restrictions.</li>
+    <li>Cloudflare or server-side issues.</li>
+    <li>The request timed out inside the browser.</li>
+  </ul>
+
+  <p>
+    If the site itself cannot be loaded at all, this page cannot show
+    <code>NO</code>. In that case, the browser will show its own network error
+    page instead.
   </p>
 
   <h2 id="why-not-icmp">Why not ICMP ping?</h2>
@@ -128,7 +167,8 @@ footer{margin-top:4rem;color:#555;font-size:.8rem}
   </p>
 
   <p>
-    HTTP is therefore used as a practical browser-safe approximation.
+    HTTP is therefore used as a practical browser-safe approximation. Values
+    shown here are usually higher than command-line ICMP ping results.
   </p>
 
   <h2 id="privacy">Privacy</h2>
@@ -174,7 +214,7 @@ footer{margin-top:4rem;color:#555;font-size:.8rem}
 <audio id="stink" src="/stink.mp3" preload="auto"></audio>
 
 <script>
-console.log("%c114-514.org","color:#8B5A2B;font-size:20px;font-weight:bold");
+console.log("%c114-514.org","color:#C7922F;font-size:20px;font-weight:bold");
 console.log("%cやりますねぇ","color:#114514");
 
 const stink=document.getElementById("stink");
