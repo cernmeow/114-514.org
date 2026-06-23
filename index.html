@@ -92,8 +92,7 @@ async function once(){
   const c=new AbortController(),timer=setTimeout(()=>c.abort(),TIMEOUT);
   try{
     const t=performance.now();
-    const r=await fetch(`${URL}?t=${Date.now()}-${Math.random()}`,{cache:"no-store",credentials:"same-origin",signal:c.signal});
-    if(!r.ok)throw Error(r.status);
+    const r=await fetch(URL,{cache:"no-store",credentials:"same-origin",signal:c.signal});    if(!r.ok)throw Error(r.status);
     return performance.now()-t;
   }finally{clearTimeout(timer)}
 }
