@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Net Work ?</title>
+<link rel="icon" href="/Uh_favicon.svg">
+<style>
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b0b0b;color:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+nav{position:fixed;top:18px;left:24px;right:24px;display:flex;flex-wrap:wrap;gap:.55rem;font-size:.9rem}
+nav a{color:#999;text-decoration:none}
+nav a:hover{color:#8B5A2B;text-shadow:0 0 8px #8B5A2B,0 0 18px #114514}
+nav span{color:#666}
+main{text-align:center;padding:24px}
+#answer{font-size:clamp(4rem,18vw,11rem);font-weight:900;line-height:.9;color:#8B5A2B}
+#latency{margin-top:.5rem;font-size:clamp(1.8rem,7vw,3.5rem);font-weight:700;color:#8B5A2B}
+details{margin-top:2.5rem;color:#ccc}
+summary{cursor:pointer;color:#114514;font-weight:700;-webkit-user-select:none;user-select:none}
+.row{margin-top:.75rem}
+.row a{color:#fff;text-decoration:none}
+.row a:hover{color:#8B5A2B;text-shadow:0 0 8px #8B5A2B}
+.value{color:#fff}
+.ad-box{margin-top:2rem;padding-top:1rem;border-top:1px solid #1d1d1d;min-height:90px;opacity:.65}
+.ad-label{margin-bottom:.6rem;color:#444;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
+footer{position:fixed;bottom:14px;left:0;right:0;text-align:center;color:#555;font-size:.75rem}
+footer a{color:#666;text-decoration:none}
+footer a:hover{color:#8B5A2B}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="stink-link" href="/">114-514.org</a>
+  <span>/</span>
+  <a class="stink-link" href="/about.html">About</a>
+  <span>/</span>
+  <a class="stink-link" href="/about.html#methodology">Methodology</a>
+  <span>/</span>
+  <a class="stink-link" href="/about.html#privacy">Privacy</a>
+  <span>/</span>
+  <a class="stink-link" href="/about.html#open-source">Open Source</a>
+</nav>
+
+<main>
+  <div id="answer">YES</div>
+  <div id="latency">--ms</div>
+
+  <details id="advanced">
+    <summary>Advanced</summary>
+
+    <div class="row">
+      <a class="stink-link" href="/about.html#rtt">HTTP RTT:</a>
+      <span id="rtt" class="value">-</span>
+    </div>
+
+    <div class="row">
+      <a class="stink-link" href="/about.html#jitter">Jitter:</a>
+      <span id="jitter" class="value">-</span>
+    </div>
+
+    <div class="row">
+      <a class="stink-link" href="/about.html#timeout-loss">Timeout Loss:</a>
+      <span id="loss" class="value">-</span>
+    </div>
+
+    <div class="ad-box">
+      <div class="ad-label">Ad</div>
+      <div data-ea-publisher="YOUR_PUBLISHER_ID" data-ea-type="text"></div>
+    </div>
+  </details>
+</main>
+
+<footer>
+  <a class="stink-link" href="/about.html">About</a>
+  <span> / Build 114.514</span>
+</footer>
+
+<audio id="stink" src="/stink.mp3" preload="none"></audio>
+
+<script>
+console.log("%c114-514.org","color:#8B5A2B;font-size:20px;font-weight:bold");
+console.log("%cやりますねぇ","color:#114514");
+
+const URL="./ping.txt",COUNT=6,TIMEOUT=1500,WAIT=80,$=id=>document.getElementById(id);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const avg=a=>a.reduce((x,y)=>x+y,0)/a.length;
+const median=a=>{const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2};
+const jitter=a=>a.length<2?0:avg(a.slice(1).map((v,i)=>Math.abs(v-a[i])));
+
+async function once(){
+  const c=new AbortController(),timer=setTimeout(()=>c.abort(),TIMEOUT);
+  try{
+    const t=performance.now();
+    const r=await fetch(`${URL}?t=${Date.now()}-${Math.random()}`,{cache:"no-store",credentials:"same-origin",signal:c.signal});
+    if(!r.ok)throw Error(r.status);
+    return performance.now()-t;
+  }finally{clearTimeout(timer)}
+}
+
+(async()=>{
+  const samples=[];let lost=0;
+
+  for(let i=0;i<COUNT;i++){
+    try{samples.push(await once())}catch{lost++}
+    await sleep(WAIT);
+  }
+
+  const loss=lost/COUNT*100;
+
+  if(!samples.length||loss>=70){
+    $("answer").textContent="MAYBE";
+    $("latency").textContent="--ms";
+    $("rtt").textContent="Timeout";
+    $("jitter").textContent="-";
+    $("loss").textContent=`${loss.toFixed(0)}%`;
+    return;
+  }
+
+  const r=median(samples),j=jitter(samples);
+  $("latency").textContent=`${Math.round(r)}ms`;
+  $("rtt").textContent=`${r.toFixed(1)} ms`;
+  $("jitter").textContent=`${j.toFixed(1)} ms`;
+  $("loss").textContent=`${loss.toFixed(0)}%`;
+})();
+
+document.getElementById("advanced").addEventListener("toggle",e=>{
+  if(!e.target.open||window.__ea_loaded)return;
+  window.__ea_loaded=true;
+  const s=document.createElement("script");
+  s.src="https://media.ethicalads.io/media/client/ethicalads.min.js";
+  s.async=true;
+  document.body.appendChild(s);
+});
+
+const stink=document.getElementById("stink");
+
+document.querySelectorAll(".stink-link").forEach(a=>{
+  a.addEventListener("click",e=>{
+    e.preventDefault();
+    const href=a.href;
+    stink.currentTime=0;
+    stink.play().catch(()=>{});
+    setTimeout(()=>location.href=href,600);
+  });
+});
+</script>
+
+</body>
+</html>
