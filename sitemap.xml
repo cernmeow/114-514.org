@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
@@ -10,6 +9,16 @@
   <url>
     <loc>https://114-514.org/about.html</loc>
     <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://114-514.org/blog/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://114-514.org/blog/tiny-websites.html</loc>
+    <priority>0.7</priority>
   </url>
 
 </urlset>
