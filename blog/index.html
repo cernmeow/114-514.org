@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Blog / Net Work ?</title>
+
+<meta name="description" content="Notes about networks, browsers and tiny websites.">
+
+<link rel="canonical" href="https://114-514.org/blog/">
+<link rel="icon" href="/Uh_favicon.svg">
+
+<meta property="og:title" content="Blog / Net Work ?">
+<meta property="og:description" content="Notes about networks, browsers and tiny websites.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://114-514.org/blog/">
+<meta property="og:image" content="https://114-514.org/Uh_og-image.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blog / Net Work ?">
+<meta name="twitter:description" content="Notes about networks, browsers and tiny websites.">
+<meta name="twitter:image" content="https://114-514.org/Uh_og-image.png">
+
+<style>
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+body{
+  margin:0;
+  background:#0b0b0b;
+  color:#ddd;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  line-height:1.75;
+}
+
+nav{
+  position:fixed;
+  top:18px;
+  left:24px;
+  right:24px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+  font-size:.9rem;
+}
+
+nav a{
+  color:#999;
+  text-decoration:none;
+}
+
+nav a:hover{
+  color:#C7922F;
+  text-shadow:0 0 8px #C7922F,0 0 18px #114514;
+}
+
+nav span{
+  color:#666;
+}
+
+main{
+  max-width:760px;
+  margin:0 auto;
+  padding:96px 24px 64px;
+}
+
+h1{
+  color:#C7922F;
+  font-size:clamp(2.5rem,8vw,5rem);
+  line-height:1;
+}
+
+p{
+  color:#ccc;
+}
+
+ul{
+  list-style:none;
+  padding:0;
+}
+
+li{
+  margin:1rem 0;
+}
+
+li a{
+  color:#C7922F;
+  text-decoration:none;
+}
+
+li a:hover{
+  text-shadow:0 0 8px #C7922F;
+}
+
+.date{
+  color:#666;
+  font-size:.85rem;
+}
+
+footer{
+  margin-top:4rem;
+  color:#555;
+  font-size:.8rem;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="stink-link" href="/">114-514.org</a>
+  <span>/</span>
+  <a class="stink-link" href="/about.html">About</a>
+  <span>/</span>
+  <a class="stink-link" href="/blog/">Blog</a>
+</nav>
+
+<main>
+
+<h1>Blog</h1>
+
+<p>
+Small notes about networks, browsers and tiny websites.
+</p>
+
+<ul>
+
+<li>
+  <a class="stink-link" href="/blog/tiny-websites.html">
+    How Small Can A Useful Website Be?
+  </a>
+  <div class="date">
+    2026-06-24
+  </div>
+</li>
+
+</ul>
+
+<footer>
+Build 114.514
+</footer>
+
+</main>
+
+<audio id="stink" src="/stink.mp3" preload="auto"></audio>
+
+<script>
+console.log("%c114-514.org","color:#C7922F;font-size:20px;font-weight:bold");
+console.log("%cやりますねぇ","color:#114514;font-size:14px");
+console.log("%c喵嗚。","color:#ccc");
+console.log("%cSource: https://github.com/cernmeow/114-514.org","color:#666");
+
+const stink=document.getElementById("stink");
+
+document.querySelectorAll(".stink-link").forEach(a=>{
+  a.addEventListener("click",e=>{
+    e.preventDefault();
+    const href=a.href;
+    stink.currentTime=0;
+    stink.play().catch(()=>{});
+    setTimeout(()=>location.href=href,250);
+  });
+});
+</script>
+
+</body>
+</html>

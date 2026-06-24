@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>How Small Can A Useful Website Be? / Net Work ?</title>
+
+<meta name="description" content="How small can a useful website be? A note about simplicity, browser reachability tests, and tiny websites.">
+
+<link rel="canonical" href="https://114-514.org/blog/tiny-websites.html">
+
+<style>
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+body{
+  margin:0;
+  background:#0b0b0b;
+  color:#ddd;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  line-height:1.8;
+}
+
+nav{
+  position:fixed;
+  top:24px;
+  left:24px;
+  z-index:100;
+}
+
+nav a{
+  color:#999;
+  text-decoration:none;
+}
+nav a:hover{
+  color:#C7922F;
+  text-shadow:0 0 8px #C7922F,0 0 18px #114514;
+}
+main{
+  max-width:760px;
+  margin:0 auto;
+  padding:96px 24px 80px;
+}
+
+h1{
+  color:#C7922F;
+  font-size:clamp(2rem,6vw,4rem);
+  line-height:1.1;
+}
+
+p{
+  color:#ccc;
+}
+
+hr{
+  border:none;
+  height:1px;
+  background:#222;
+  margin:2.5rem 0;
+}
+
+footer{
+  margin-top:4rem;
+  color:#666;
+  font-size:.85rem;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="stink-link" href="/">← 114-514.org</a>
+  <span>/</span>
+  <a class="stink-link" href="/blog/">Blog</a>
+</nav>
+
+<main>
+
+<h1>How Small Can A Useful Website Be?</h1>
+
+<p>
+When the web became faster, websites became heavier.
+</p>
+
+<p>
+Modern pages routinely ship megabytes of JavaScript, large image bundles,
+analytics scripts, trackers, fonts, advertisements, video players,
+and frameworks.
+</p>
+
+<p>
+For many services that may be justified.
+</p>
+
+<p>
+For many others, it is not.
+</p>
+
+<hr>
+
+<p>
+Net Work ? started with a simple question:
+</p>
+
+<p>
+If a user asks <em>"does the Internet work?"</em>,
+what is the smallest useful answer we can provide?
+</p>
+
+<p>
+The answer turned out to be surprisingly small.
+</p>
+
+<p>
+A single page.
+</p>
+
+<p>
+A few requests.
+</p>
+
+<p>
+A single word.
+</p>
+
+<p>
+<strong>YES.</strong>
+</p>
+
+<hr>
+
+<p>
+The homepage performs a tiny browser-side HTTP reachability test.
+</p>
+
+<p>
+If the browser can successfully reach this site through DNS, TLS and HTTP,
+the page shows <strong>YES</strong>.
+</p>
+
+<p>
+If repeated requests fail after the page has loaded,
+it shows <strong>NO</strong>.
+</p>
+
+<p>
+Nothing more.
+</p>
+
+<p>
+No account.
+</p>
+
+<p>
+No dashboard.
+</p>
+
+<p>
+No signup form.
+</p>
+
+<p>
+No notification bell.
+</p>
+
+<p>
+No infinite scroll.
+</p>
+
+<hr>
+
+<p>
+This simplicity is intentional.
+</p>
+
+<p>
+Many connectivity checks require command-line tools,
+operating-system utilities,
+or knowledge that casual users do not have.
+</p>
+
+<p>
+A browser is usually already open.
+</p>
+
+<p>
+A URL is usually easier than an explanation.
+</p>
+
+<hr>
+
+<p>
+There is another advantage.
+</p>
+
+<p>
+Small pages are difficult to break.
+</p>
+
+<p>
+A tiny page loads faster.
+</p>
+
+<p>
+A tiny page has fewer dependencies.
+</p>
+
+<p>
+A tiny page has fewer moving parts.
+</p>
+
+<p>
+A tiny page often survives poor network conditions better than a complicated one.
+</p>
+
+<hr>
+
+<p>
+Net Work ? currently weighs only a few dozen kilobytes.
+</p>
+
+<p>
+That is smaller than many modern icons.
+</p>
+
+<p>
+Smaller than many advertisements.
+</p>
+
+<p>
+Smaller than many loading animations.
+</p>
+
+<p>
+The homepage currently weighs only <strong>7 KB</strong>.
+</p>
+
+<p>
+About <strong>1 second</strong> on a 56 kbps dial-up connection.
+</p>
+
+<p>
+Measured in dial-up seconds rather than megabytes.
+</p>
+
+<p>
+Slow by modern standards.
+</p>
+
+<p>
+Fast by dial-up standards.
+</p>
+
+<p>
+Still usable.
+</p>
+
+
+
+<hr>
+
+<p>
+The goal is not nostalgia.
+</p>
+
+<p>
+The goal is not to recreate the web of the 1990s.
+</p>
+
+<p>
+The goal is simply to ask:
+</p>
+
+<p>
+What is the minimum amount of technology required to answer one question well?
+</p>
+
+<hr>
+
+<p>
+For this website, the answer is:
+</p>
+
+<p style="font-size:2rem;color:#C7922F;">
+<strong>YES.</strong>
+</p>
+
+<footer>
+114-514.org / Build 114.514
+</footer>
+
+</main>
+<audio id="stink" src="/stink.mp3" preload="auto"></audio>
+<script>
+const stink=document.getElementById("stink");
+
+document.querySelectorAll(".stink-link").forEach(a=>{
+  a.addEventListener("click",e=>{
+    e.preventDefault();
+
+    const href=a.href;
+
+    stink.currentTime=0;
+    stink.play().catch(()=>{});
+
+    setTimeout(()=>{
+      location.href=href;
+    },250);
+  });
+});
+</script>
+</body>
+</html>
