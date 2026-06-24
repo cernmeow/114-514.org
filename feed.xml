@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>Net Work ?</title>
+  <link>https://114-514.org/</link>
+  <description>Small notes about networks, browsers and tiny websites.</description>
+  <language>en</language>
+
+  <item>
+    <title>How Small Can A Useful Website Be?</title>
+    <link>https://114-514.org/blog/tiny-websites</link>
+    <guid>https://114-514.org/blog/tiny-websites</guid>
+    <pubDate>Wed, 24 Jun 2026 11:45:14 +0800</pubDate>
+    <description>A note about simplicity, browser reachability tests, and tiny websites.</description>
+  </item>
+
+</channel>
+</rss>

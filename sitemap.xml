@@ -20,5 +20,9 @@
     <loc>https://114-514.org/blog/tiny-websites</loc>
     <priority>0.7</priority>
   </url>
+  
+  <url>
+  <loc>https://114-514.org/feed.xml</loc>
+  </url>
 
 </urlset>
