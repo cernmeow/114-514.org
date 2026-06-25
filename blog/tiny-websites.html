@@ -326,15 +326,10 @@ const stink=document.getElementById("stink");
 document.querySelectorAll(".stink-link").forEach(a=>{
   a.addEventListener("click",e=>{
     e.preventDefault();
-
     const href=a.href;
-
     stink.currentTime=0;
     stink.play().catch(()=>{});
-
-    setTimeout(()=>{
-      location.href=href;
-    },250);
+    setTimeout(()=>location.href=href,500);
   });
 });
 </script>
