@@ -9,7 +9,7 @@
 <meta name="description" content="Notes about networks, browsers and tiny websites.">
 
 <link rel="canonical" href="https://114-514.org/blog/">
-<link rel="icon" href="/Uh_favicon.svg">
+<link rel="icon" href="/assets/icons/Uh_favicon.svg">
 <link rel="alternate" type="application/rss+xml" title="Net Work ?" href="https://114-514.org/feed.xml">
 <link rel="webmention" href="https://webmention.io/114-514.org/webmention">
 
@@ -17,12 +17,12 @@
 <meta property="og:description" content="Notes about networks, browsers and tiny websites.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://114-514.org/blog/">
-<meta property="og:image" content="https://114-514.org/Uh_og-image.png">
+<meta property="og:image" content="https://114-514.org/assets/images/Uh_og-image.png">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Blog / Net Work ?">
 <meta name="twitter:description" content="Notes about networks, browsers and tiny websites.">
-<meta name="twitter:image" content="https://114-514.org/Uh_og-image.png">
+<meta name="twitter:image" content="https://114-514.org/assets/images/Uh_og-image.png">
 
 <script type="application/ld+json">
 {
@@ -142,7 +142,7 @@ Small notes about networks, browsers and tiny websites.
 </p>
 <p>
 
-RSS:<a class="stink-link" href="/feed.xml">feed.xml</a>
+RSS:<a class="stink-link" href="/feed.xml" target="_blank" rel="noopener noreferrer">feed.xml</a>
 
 </p>
 
@@ -152,7 +152,7 @@ Fediverse:
 
 <a class="stink-link"
 
-   href="https://fed.brid.gy/web/114-514.org">
+   href="https://fed.brid.gy/web/114-514.org" target="_blank" rel="noopener noreferrer">
 
    @114-514.org@web.brid.gy
 
@@ -177,7 +177,7 @@ Build 114.514
 
 </main>
 
-<audio id="stink" src="/stink.mp3" preload="auto"></audio>
+<audio id="stink" src="/assets/audio/stink.mp3" preload="auto"></audio>
 
 <script>
 console.log("%c114-514.org","color:#C7922F;font-size:20px;font-weight:bold");
@@ -193,7 +193,13 @@ document.querySelectorAll(".stink-link").forEach(a=>{
     const href=a.href;
     stink.currentTime=0;
     stink.play().catch(()=>{});
-    setTimeout(()=>location.href=href,250);
+    setTimeout(()=>{
+      if(a.target==="_blank"){
+        window.open(href,"_blank","noopener,noreferrer");
+      }else{
+        location.href=href;
+      }
+    },250);
   });
 });
 </script>

@@ -1,0 +1,31 @@
+main{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:2rem;
+  text-align:center;
+}
+
+#status{
+  margin:.3em 0;
+  font-size:clamp(4rem,14vw,8rem);
+  font-weight:700;
+  letter-spacing:-.04em;
+  color:#C7922F;
+}
+
+#description{
+  max-width:36rem;
+  color:#888;
+}
+
+.fade{
+  opacity:0;
+  transition:opacity .25s;
+}
+
+.fade.show{
+  opacity:1;
+}

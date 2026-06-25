@@ -44,70 +44,16 @@
 }
 </script>
 
-<style>
-html{
-  -webkit-text-size-adjust:100%;
-  text-size-adjust:100%;
-}
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/blog.css">
+<link rel="stylesheet" href="/css/webmentions.css">
 
-body{
-  margin:0;
-  background:#0b0b0b;
-  color:#ddd;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-  line-height:1.8;
-}
-
-nav{
-  position:fixed;
-  top:24px;
-  left:24px;
-  z-index:100;
-}
-
-nav a{
-  color:#999;
-  text-decoration:none;
-}
-nav a:hover{
-  color:#C7922F;
-  text-shadow:0 0 8px #C7922F,0 0 18px #114514;
-}
-main{
-  max-width:760px;
-  margin:0 auto;
-  padding:96px 24px 80px;
-}
-
-h1{
-  color:#C7922F;
-  font-size:clamp(2rem,6vw,4rem);
-  line-height:1.1;
-}
-
-p{
-  color:#ccc;
-}
-
-hr{
-  border:none;
-  height:1px;
-  background:#222;
-  margin:2.5rem 0;
-}
-
-footer{
-  margin-top:4rem;
-  color:#666;
-  font-size:.85rem;
-}
-</style>
 </head>
 
 <body>
 
 <nav>
-  <a class="stink-link" href="/">← 114-514.org</a>
+  <a class="stink-link" href="/">114-514.org</a>
   <span>/</span>
   <a class="stink-link" href="/blog/">Blog</a>
 </nav>
@@ -333,13 +279,47 @@ For this website, the answer is:
 </p>
 </div>
 
+<div class="webmentions" aria-label="Webmentions">
+  <a class="wm-action" href="https://bsky.app/profile/114-514.org.web.brid.gy/post/3mozrsnpzpzb2"
+    target="_blank" rel="noopener noreferrer"
+    title="Like / view on Bluesky">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+    <span id="wm-like">0</span>
+  </a>
+
+  <a class="wm-action" href="https://bsky.app/profile/114-514.org.web.brid.gy/post/3mozrsnpzpzb2"
+    target="_blank" rel="noopener noreferrer"
+    title="Repost on Bluesky">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+    <span id="wm-repost">0</span>
+  </a>
+
+  <a class="wm-action" href="https://bsky.app/profile/114-514.org.web.brid.gy/post/3mozrsnpzpzb2"
+    target="_blank" rel="noopener noreferrer"
+    title="Reply on Bluesky">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+    <span id="wm-reply">0</span>
+  </a>
+
+  <button class="wm-action" id="copy-link" type="button" title="Copy link">
+  <svg viewBox="0 0 24 24">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+  </svg>
+  <span id="wm-mention">0</span>
+  <span class="copy-toast" id="copy-toast">
+    Copied!
+  </span>
+</button>
+</div>
+
+</main>
 
 <footer>
 114-514.org / Build 114.514
 </footer>
 
-</main>
-<audio id="stink" src="/stink.mp3" preload="auto"></audio>
+<audio id="stink" src="/assets/audio/stink.mp3" preload="auto"></audio>
 <script>
 const stink=document.getElementById("stink");
 
@@ -357,6 +337,70 @@ document.querySelectorAll(".stink-link").forEach(a=>{
     },250);
   });
 });
+</script>
+
+<script>
+const canonical=document.querySelector('link[rel="canonical"]')?.href;
+const copy=document.getElementById("copy-link");
+const toast=document.getElementById("copy-toast");
+
+function copied(){
+  if(!toast)return;
+
+  toast.textContent="✓ Copied";
+  toast.classList.add("show");
+
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  },1200);
+}
+
+copy?.addEventListener("click",async e=>{
+  e.preventDefault();
+
+  const url=canonical||location.href;
+
+  try{
+    if(navigator.clipboard&&window.isSecureContext){
+      await navigator.clipboard.writeText(url);
+    }else{
+      const t=document.createElement("textarea");
+      t.value=url;
+      t.setAttribute("readonly","");
+      t.style.position="fixed";
+      t.style.left="-9999px";
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand("copy");
+      t.remove();
+    }
+
+    copy.title="Copied";
+    copy.classList.add("copied");
+    copied();
+
+    setTimeout(()=>{
+      copy.title="Copy article link";
+      copy.classList.remove("copied");
+    },1200);
+
+  }catch{
+    prompt("Copy this link:",url);
+  }
+});
+
+if(canonical){
+  fetch("https://webmention.io/api/count?target="+encodeURIComponent(canonical))
+    .then(r=>r.json())
+    .then(data=>{
+      const t=data.type||{};
+      document.getElementById("wm-like").textContent=t.like||0;
+      document.getElementById("wm-repost").textContent=t.repost||0;
+      document.getElementById("wm-reply").textContent=t.reply||0;
+      document.getElementById("wm-mention").textContent=t.mention||0;
+    })
+    .catch(()=>{});
+}
 </script>
 </body>
 </html>

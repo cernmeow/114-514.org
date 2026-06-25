@@ -1,0 +1,37 @@
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+body{
+  margin:0;
+  background:#0b0b0b;
+  color:#ddd;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  line-height:1.8;
+}
+
+nav{
+  position:fixed;
+  top:24px;
+  left:24px;
+  z-index:100;
+}
+
+nav a{
+  color:#999;
+  text-decoration:none;
+}
+
+nav a:hover{
+  color:#C7922F;
+  text-shadow:0 0 8px #C7922F,0 0 18px #114514;
+}
+
+footer{
+  max-width:760px;
+  margin:0 auto;
+  padding:0 24px 48px;
+  color:#666;
+  font-size:.85rem;
+}
